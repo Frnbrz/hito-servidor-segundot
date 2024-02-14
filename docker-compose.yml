@@ -9,7 +9,6 @@ services:
       POSTGRES_DB: magicwater
     ports:
       - "5440:5432"
-
     volumes:
       - my-hito-db:/var/lib/postgres/data
 volumes:
