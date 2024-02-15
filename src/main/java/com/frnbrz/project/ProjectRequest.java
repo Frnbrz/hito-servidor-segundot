@@ -1,4 +1,4 @@
-package com.frnbrz.book;
+package com.frnbrz.project;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class BookRequest {
+public class ProjectRequest {
 
     private Integer id;
-    private String author;
-    private String isbn;
+    private String title;
+    private String description;
 }

@@ -1,25 +1,22 @@
-package com.frnbrz.task;
+package com.frnbrz.project;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.annotation.Validated;
-
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/tasks")
+@RequestMapping("/api/v1/projects")
 @RequiredArgsConstructor
-public class TaskController {
+public class ProjectController {
 
-    private final TaskService service;
+    private final ProjectService service;
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(
             @PathVariable Integer id,
-            @RequestBody TaskRequest request
+            @RequestBody ProjectRequest request
     ) {
         service.update(id, request);
         return ResponseEntity.accepted().build();
@@ -27,14 +24,14 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<?> save(
-            @Validated @RequestBody TaskDTO dto
+            @RequestBody ProjectRequest request
     ) {
-        TaskDTO saved = service.save(dto);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+        service.save(request);
+        return ResponseEntity.accepted().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> findAll() {
+    public ResponseEntity<List<Project>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 }
