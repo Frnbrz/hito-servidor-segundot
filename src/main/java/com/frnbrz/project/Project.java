@@ -1,5 +1,6 @@
 package com.frnbrz.project;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.frnbrz.task.Task;
 import com.frnbrz.token.Token;
 import jakarta.persistence.*;
@@ -31,6 +32,7 @@ public class Project {
     private String description;
 
     @OneToMany(mappedBy = "project")
+    //@JsonManagedReference
     private List<Task> tasks;
 
     @CreatedDate

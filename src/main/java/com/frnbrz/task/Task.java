@@ -1,7 +1,7 @@
 package com.frnbrz.task;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.frnbrz.project.Project;
-import com.frnbrz.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,8 +29,9 @@ public class Task {
     private String title;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "project_id")
+    //@JsonBackReference
     public Project project;
 
     @CreatedDate
