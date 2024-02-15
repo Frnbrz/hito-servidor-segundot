@@ -1,5 +1,7 @@
 package com.frnbrz.task;
 
+import com.frnbrz.project.Project;
+import com.frnbrz.project.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +12,20 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository repository;
+    private final ProjectService service;
 
-    public void save(TaskRequest request) {
-        var book = Task.builder()
-                .id(request.getId())
+
+    public Task create(TaskRequest request) {
+        Project project = service.findById(request.getProjectId());
+        Task task = Task.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
+                .project(project)
                 .build();
-        repository.save(book);
+        return repository.save(task);
     }
 
     public List<Task> findAll() {
         return repository.findAll();
-    }
-
-    public void update(Integer id, TaskRequest request) {
-        var task = Task.builder()
-                .id(id)
-                .title(request.getTitle())
-                .description(request.getDescription())
-                .build();
-        repository.save(task);
     }
 }

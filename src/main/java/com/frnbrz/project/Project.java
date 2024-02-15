@@ -1,10 +1,7 @@
-package com.frnbrz.book;
+package com.frnbrz.project;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.frnbrz.task.Task;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,31 +21,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Book {
+public class Project {
 
     @Id
     @GeneratedValue
     private Integer id;
-    private String author;
-    private String isbn;
+    private String title;
+    private String description;
+
+    @OneToMany(mappedBy = "project")
+    private List<Task> tasks;
 
     @CreatedDate
-    @Column(
-            nullable = false,
-            updatable = false
-    )
+    @Column( nullable = false, updatable = false )
     private LocalDateTime createDate;
 
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModified;
 
-
     @CreatedBy
-    @Column(
-            nullable = false,
-            updatable = false
-    )
+    @Column( nullable = false, updatable = false )
     private Integer createdBy;
 
     @LastModifiedBy

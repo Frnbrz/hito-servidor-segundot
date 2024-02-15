@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TaskRequest {
-
     private Integer id;
     private String title;
     private String description;
+    private Integer projectId;
 }

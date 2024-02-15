@@ -3,6 +3,8 @@ package com.frnbrz.task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+
 
 import java.util.List;
 
@@ -13,25 +15,14 @@ public class TaskController {
 
     private final TaskService service;
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> update(
-            @PathVariable Integer id,
-            @RequestBody TaskRequest request
-    ) {
-        service.update(id, request);
-        return ResponseEntity.accepted().build();
-    }
-
     @PostMapping
-    public ResponseEntity<?> save(
-            @RequestBody TaskRequest request
-    ) {
-        service.save(request);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<?> save( @Validated @RequestBody TaskRequest request ) {
+        Task saved = service.create(request);
+        return ResponseEntity.accepted().body(saved);
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> findAllBooks() {
+    public ResponseEntity<List<Task>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 }
