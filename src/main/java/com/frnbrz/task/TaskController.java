@@ -18,9 +18,9 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<?> save(
-            @Validated @RequestBody TaskDTO dto
+            @Validated @RequestBody TaskRequest request
     ) {
-        TaskDTO saved = service.save(dto);
+        Task saved = service.save(request);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
