@@ -1,15 +1,15 @@
 package com.frnbrz.task;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskRequest {
+
     private Integer id;
     private String title;
     private String description;
-    private Integer projectId;
 }

@@ -1,6 +1,7 @@
 package com.frnbrz.task;
 
 import com.frnbrz.project.Project;
+import com.frnbrz.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +29,12 @@ public class Task {
     private String title;
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    public Project project;
+
     @CreatedDate
-    @Column( nullable = false, updatable = false  )
+    @Column( nullable = false,updatable = false )
     private LocalDateTime createDate;
 
     @LastModifiedDate
@@ -40,13 +45,6 @@ public class Task {
     @CreatedBy
     @Column( nullable = false, updatable = false )
     private Integer createdBy;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    public Project project;
-
-    @Column(name = "project_id", insertable = false, updatable = false)
-    private Integer projectId;
 
     @LastModifiedBy
     @Column(insertable = false)

@@ -1,6 +1,7 @@
 package com.frnbrz.project;
 
 import com.frnbrz.task.Task;
+import com.frnbrz.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,12 +34,13 @@ public class Project {
     private List<Task> tasks;
 
     @CreatedDate
-    @Column( nullable = false, updatable = false )
+    @Column( nullable = false,updatable = false )
     private LocalDateTime createDate;
 
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModified;
+
 
     @CreatedBy
     @Column( nullable = false, updatable = false )

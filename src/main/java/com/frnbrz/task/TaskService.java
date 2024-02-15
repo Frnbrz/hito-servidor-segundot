@@ -1,7 +1,7 @@
+
 package com.frnbrz.task;
 
-import com.frnbrz.project.Project;
-import com.frnbrz.project.ProjectService;
+import com.frnbrz.project.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +12,20 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository repository;
-    private final ProjectService service;
+    private final ProjectRepository projectRepository;
 
-
-    public Task create(TaskRequest request) {
-        Project project = service.findById(request.getProjectId());
-        Task task = Task.builder()
+    public void save(TaskRequest request) {
+        var project = projectRepository.findById(1);
+        if (project.isEmpty()) {
+            throw new RuntimeException("Project not found");
+        }
+        var task = Task.builder()
+                .id(request.getId())
                 .title(request.getTitle())
                 .description(request.getDescription())
-                .project(project)
+                .project(project.get())
                 .build();
-        return repository.save(task);
+        repository.save(task);
     }
 
     public List<Task> findAll() {
