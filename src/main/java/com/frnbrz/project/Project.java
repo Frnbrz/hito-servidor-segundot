@@ -30,8 +30,8 @@ public class Project {
     private String title;
     private String description;
 
-    //@OneToMany(mappedBy = "project")
-    //private List<Task> tasks;
+    @OneToMany(mappedBy = "project")
+    private List<Task> tasks;
 
     @CreatedDate
     @Column( nullable = false,updatable = false )

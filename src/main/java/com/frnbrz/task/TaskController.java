@@ -17,7 +17,7 @@ public class TaskController {
     private final TaskService service;
 
     @PostMapping
-    public ResponseEntity<?> save(
+    public ResponseEntity<Task> save(
             @Validated @RequestBody TaskRequest request
     ) {
         Task saved = service.save(request);

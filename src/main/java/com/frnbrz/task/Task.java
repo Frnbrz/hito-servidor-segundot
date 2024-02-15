@@ -29,9 +29,9 @@ public class Task {
     private String title;
     private String description;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "project_id")
-    //public Project project;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    public Project project;
 
     @CreatedDate
     @Column( nullable = false,updatable = false )

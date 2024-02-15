@@ -1,6 +1,7 @@
 package com.frnbrz.project;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,11 @@ public class ProjectController {
     private final ProjectService service;
 
     @PostMapping
-    public ResponseEntity<?> save(
+    public ResponseEntity<ProjectRequest> save(
             @RequestBody ProjectRequest request
     ) {
         service.save(request);
-        return ResponseEntity.accepted().build();
+        return new ResponseEntity<>(request, HttpStatus.CREATED);
     }
 
     @GetMapping
