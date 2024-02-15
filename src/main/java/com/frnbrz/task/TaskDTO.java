@@ -1,15 +1,16 @@
 package com.frnbrz.task;
 
-import lombok.*;
+import com.frnbrz.project.Project;
+import lombok.Builder;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class TaskRequest {
+public class TaskDTO {
+
     private Integer id;
     private String title;
     private String description;
+    private Project project;
     private Integer projectId;
 }

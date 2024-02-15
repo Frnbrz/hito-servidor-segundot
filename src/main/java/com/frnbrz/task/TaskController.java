@@ -1,8 +1,11 @@
 package com.frnbrz.task;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+
 
 import java.util.List;
 
@@ -15,14 +18,14 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<?> save(
-            @RequestBody TaskRequest request
+            @Validated @RequestBody TaskDTO dto
     ) {
-        service.save(request);
-        return ResponseEntity.accepted().build();
+        TaskDTO saved = service.save(dto);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> findAllBooks() {
+    public ResponseEntity<List<Task>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 }
