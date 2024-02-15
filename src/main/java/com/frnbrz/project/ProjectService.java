@@ -11,13 +11,15 @@ public class ProjectService {
 
     private final ProjectRepository repository;
 
-    public void save(ProjectRequest request) {
+    public Project save(ProjectRequest request) {
         var project = Project.builder()
                 .id(request.getId())
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .build();
         repository.save(project);
+
+        return project;
     }
 
     public List<Project> findAll() {

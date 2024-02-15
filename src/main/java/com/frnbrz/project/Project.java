@@ -32,7 +32,7 @@ public class Project {
     private String description;
 
     @OneToMany(mappedBy = "project")
-    //@JsonManagedReference
+    @JsonManagedReference
     private List<Task> tasks;
 
     @CreatedDate

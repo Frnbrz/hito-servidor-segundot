@@ -1,7 +1,6 @@
-package com.frnbrz.project;
+package com.frnbrz.book;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,22 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/projects")
+@RequestMapping("/api/v1/books")
 @RequiredArgsConstructor
-public class ProjectController {
+public class BookController {
 
-    private final ProjectService service;
+    private final BookService service;
 
     @PostMapping
-    public ResponseEntity<Project> save(
-            @RequestBody ProjectRequest request
+    public ResponseEntity<?> save(
+            @RequestBody BookRequest request
     ) {
-        var newProject = service.save(request);
-        return new ResponseEntity<>(newProject, HttpStatus.CREATED);
+        service.save(request);
+        return ResponseEntity.accepted().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Project>> findAllBooks() {
+    public ResponseEntity<List<Book>> findAllBooks() {
         return ResponseEntity.ok(service.findAll());
     }
 }
