@@ -4,6 +4,7 @@ import com.frnbrz.config.JwtService;
 import com.frnbrz.token.Token;
 import com.frnbrz.token.TokenRepository;
 import com.frnbrz.token.TokenType;
+import com.frnbrz.user.Role;
 import com.frnbrz.user.User;
 import com.frnbrz.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +34,7 @@ public class AuthenticationService {
         .lastname(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
-        .role(request.getRole())
+            .role(Role.MANAGER)
         .build();
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);
@@ -42,6 +43,7 @@ public class AuthenticationService {
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
             .refreshToken(refreshToken)
+            .email(savedUser.getEmail())
         .build();
   }
 
@@ -59,8 +61,9 @@ public class AuthenticationService {
     revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
-        .accessToken(jwtToken)
+            .accessToken(jwtToken)
             .refreshToken(refreshToken)
+            .email(user.getEmail())
         .build();
   }
 

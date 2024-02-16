@@ -25,4 +25,9 @@ public class ProjectService {
     public List<Project> findAll() {
         return repository.findAll();
     }
+
+    public Project findById(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+    }
 }

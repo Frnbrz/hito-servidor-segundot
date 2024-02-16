@@ -24,6 +24,7 @@ public class TaskService {
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .project(project.get())
+                .status("todo")
                 .build();
         repository.save(task);
 
