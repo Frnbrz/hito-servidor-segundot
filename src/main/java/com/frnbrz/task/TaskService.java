@@ -34,4 +34,17 @@ public class TaskService {
     public List<Task> findAll() {
         return repository.findAll();
     }
+
+    public Task update(Integer id, TaskRequest request) {
+        var task = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        task.setTitle(request.getTitle());
+        task.setDescription(request.getDescription());
+        repository.save(task);
+        return task;
+    }
+
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
 }

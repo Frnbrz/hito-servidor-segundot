@@ -24,6 +24,23 @@ public class TaskController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Task> update(
+            @PathVariable Integer id,
+            @Validated @RequestBody TaskRequest request
+    ) {
+        Task updated = service.update(id, request);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(
+            @PathVariable Integer id
+    ) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping
     public ResponseEntity<List<Task>> findAll() {
         return ResponseEntity.ok(service.findAll());
